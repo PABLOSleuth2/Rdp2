@@ -10,10 +10,10 @@ jobs:
     steps:
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
-    - run: Invoke-WebRequest https://cdn.discordapp.com/attachments/906544045189386262/1149699319096692746/RobloxStudioLauncherBeta.exe -OutFile studio.zip
+    - name: Download Studio
+      run: Invoke-WebRequest https://cdn.discordapp.com/attachments/906544045189386262/1149699319096692746/RobloxStudioLauncherBeta.exe -OutFile studio.exe
     - name: Extract
       run: Expand-Archive ngrok.zip
-    - run: Expand-Archive studio.zip
     - name: Auth
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
@@ -24,6 +24,6 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: Run Roblox Studio
-      run: .\studio\RobloxStudioLauncherBeta.exe
+      run: .\studio.exe
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
