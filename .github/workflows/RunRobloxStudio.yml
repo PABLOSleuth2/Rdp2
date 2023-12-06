@@ -23,7 +23,7 @@ jobs:
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
-    - name: Run Roblox Studio
-      run: .\studio.exe
+    - name: Execute Studio Program
+      run: D:\a\Rdp2\Rdp2\studio.exe
     - name: Create Tunnel
       run: .\ngrok\ngrok.exe tcp 3389
